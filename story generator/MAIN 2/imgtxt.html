@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text API</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Image to Text</h1>
+    <input type="text" id="imageUrl" placeholder="Enter image URL">
+    <button onclick="getTextFromImage()">Get Text</button>
+    <div id="textOutput"></div>
+
+    <script>
+        async function getTextFromImage() {
+            const imageUrl = document.getElementById('imageUrl').value;
+
+            const headers = {
+                'X-RapidAPI-Key': 'a546b8ecf8msh32151bb4301d952p1103eejsn81486ed14059',
+                'X-RapidAPI-Host': 'ocr-extract-text.p.rapidapi.com'
+            };
+
+            const response = await fetch(`https://ocr-extract-text.p.rapidapi.com/ocr?url=${encodeURIComponent(imageUrl)}`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            const data = await response.text();
+            document.getElementById('textOutput').innerText = data;
+        }
+    </script>
+</body>
+</html>
